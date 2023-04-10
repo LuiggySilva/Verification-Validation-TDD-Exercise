@@ -1,2 +1,2 @@
-# Verificação e Validaão de Software
+# Verificação e Validação de Software
 - Exercício 2: Praticando TDD
