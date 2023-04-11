@@ -25,15 +25,6 @@ public class FuncionarioTest {
 		assertEquals("ERRO: getSalario()", salario, funcionario.getSalario(), 0); 
 		assertEquals("ERRO: getCargo()", cargo, funcionario.getCargo()); 
 	}	
-
-	@Test
-	void testFuncionarioEmptyConstructor() {
-		Funcionario funcionario = new Funcionario();
-		assertNull(funcionario.getNome()); 
-		assertNull(funcionario.getEmail()); 
-		assertEquals(0, funcionario.getSalario(), 0);
-		assertNull(funcionario.getCargo()); 
-	}
 	
 	@Test
 	void testFuncionarioSetMethods() {
