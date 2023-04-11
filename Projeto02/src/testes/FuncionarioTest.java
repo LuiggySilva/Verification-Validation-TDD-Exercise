@@ -1,9 +1,12 @@
 package testes;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import projeto.Funcionario;
 
 public class FuncionarioTest {
 
@@ -11,14 +14,14 @@ public class FuncionarioTest {
 	void testFuncionarioConstructor() {
 		String nome = "Luiggy";
 		String email = "luiggy@email.com";
-		Integer salario = 10000;
+		double salario = 10000;
 		String cargo = "GERENTE";
 		
 		Funcionario funcionario = new Funcionario(nome, email, salario, cargo);
 		
 		assertEquals("ERRO: getNome()", nome, funcionario.getNome()); 
 		assertEquals("ERRO: getEmail()", email, funcionario.getEmail()); 
-		assertEquals("ERRO: getSalario()", salario, funcionario.getSalario()); 
+		assertEquals("ERRO: getSalario()", salario, funcionario.getSalario(), 0); 
 		assertEquals("ERRO: getCargo()", cargo, funcionario.getCargo()); 
 	}	
 
@@ -27,7 +30,7 @@ public class FuncionarioTest {
 		Funcionario funcionario = new Funcionario();
 		assertNull(funcionario.getNome()); 
 		assertNull(funcionario.getEmail()); 
-		assertNull(funcionario.getSalario());
+		assertEquals(0, funcionario.getSalario(), 0);
 		assertNull(funcionario.getCargo()); 
 	}
 	
@@ -35,19 +38,19 @@ public class FuncionarioTest {
 	void testFuncionarioSetMethods() {
 		String nome1 = "Luiggy";
 		String email1 = "luiggy@email.com";
-		Integer salario1 = 10000;
+		Double salario1 = 10000.0;
 		String cargo1 = "CEO";
 		
 		Funcionario funcionario = new Funcionario(nome1, email1, salario1, cargo1);
 		
 		assertEquals("ERRO: getNome()", nome1, funcionario.getNome()); 
 		assertEquals("ERRO: getEmail()", email1, funcionario.getEmail()); 
-		assertEquals("ERRO: getSalario()", salario1, funcionario.getSalario()); 
+		assertEquals("ERRO: getSalario()", salario1, funcionario.getSalario(), 0); 
 		assertEquals("ERRO: getCargo()", cargo1, funcionario.getCargo()); 
 		
 		String nome2 = "Irineu";
 		String email2 = "irineu@email.com";
-		Integer salario2 = 5000;
+		Double salario2 = 5000.0;
 		String cargo2 = "DBA";
 		
 		funcionario.setNome(nome2);
@@ -57,9 +60,8 @@ public class FuncionarioTest {
 		
 		assertEquals("ERRO: setNome()", nome2, funcionario.getNome()); 
 		assertEquals("ERRO: setEmail()", email2, funcionario.getEmail()); 
-		assertEquals("ERRO: setSalario()", salario2, funcionario.getSalario()); 
+		assertEquals("ERRO: setSalario()", salario2, funcionario.getSalario(), 0); 
 		assertEquals("ERRO: setCargo()", cargo2, funcionario.getCargo()); 
-		
 	}
 
 	@Test
@@ -68,7 +70,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario ("", "funcionario@email.com", 1000, "DBA");
+	        	   Funcionario funcionario = new Funcionario ("", "funcionario@email.com", 1000.0, "DBA");
 	           },
 	           "ERRO: Criação de funcionário com nome vazio"
 	    );
@@ -81,7 +83,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("funcionario", "funcionario@email.com", 1000, "DBA");
+	        	   Funcionario funcionario = new Funcionario("funcionario", "funcionario@email.com", 1000.0, "DBA");
 	        	   funcionario.setNome("");
 	           },
 	           "ERRO: Alteração de funcionário com nome vazio"
@@ -95,7 +97,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "", 1000, "DBA");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "", 1000.0, "DBA");
 	           },
 	           "ERRO: Criação de funcionário com email vazio"
 	    );
@@ -108,7 +110,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000, "DBA");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "DBA");
 	        	   funcionario.setEmail("");
 	           },
 	           "ERRO: Alteração de funcionário com email vazio"
@@ -122,7 +124,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown1 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 0, "DBA");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 0.0, "DBA");
 	           },
 	           "ERRO: Criação de funcionário com salario igual a zero"
 	    );
@@ -132,7 +134,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown2 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", -1, "DBA");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", -1.0, "DBA");
 	           },
 	           "ERRO: Criação de funcionário com salario menor ou igual a zero"
 	    );
@@ -145,8 +147,8 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown1 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000, "DBA");
-	        	   funcionario.setSalario(0);
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "DBA");
+	        	   funcionario.setSalario(0.0);
 	           },
 	           "ERRO: Alteração de funcionário com salario igual a zero"
 	    );
@@ -156,8 +158,8 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown2 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000, "DBA");
-	        	   funcionario.setSalario(-1);
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "DBA");
+	        	   funcionario.setSalario(-1.0);
 	           },
 	           "ERRO: Alteração de funcionário com salario menor ou igual a zero"
 	    );
@@ -170,7 +172,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown1 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000, "");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "");
 	           },
 	           "ERRO: Criação de funcionário com cargo vazio"
 	    );
@@ -180,7 +182,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown2 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000, "FAZ_TUDO");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "FAZ_TUDO");
 	           },
 	           "ERRO: Criação de funcionário com cargo inexistente"
 	    );
@@ -190,7 +192,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown3 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000, "ESTAGIO");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "ESTAGIO");
 	           },
 	           "ERRO: Criação de funcionário com cargo inexistente"
 	    );
@@ -203,7 +205,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown1 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 10000, "GERENTE");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "GERENTE");
 	        	   funcionario.setCargo("");
 	           },
 	           "ERRO: Alteração de funcionário com cargo vazio"
@@ -214,7 +216,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown2 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 10000, "GERENTE");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "GERENTE");
 	        	   funcionario.setCargo("DEV");
 	           },
 	           "ERRO: Alteração de funcionário com cargo inexistente"
@@ -225,7 +227,7 @@ public class FuncionarioTest {
 		IllegalArgumentException thrown3 = assertThrows(
 				IllegalArgumentException.class,
 	           () -> {
-	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 10000, "GERENTE");
+	        	   Funcionario funcionario = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "GERENTE");
 	        	   funcionario.setCargo("ESTAGIO");
 	           },
 	           "ERRO: Alteração de funcionário com cargo inexistente"
@@ -236,77 +238,77 @@ public class FuncionarioTest {
 	@Test
 	void testFuncionarioGetNetSalaryDESENVOLVEDOR() {
 		// Valor bem maior
-		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000, "DESENVOLVEDOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 8000, funcionario1.getSalarioLiquido());
+		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "DESENVOLVEDOR");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 8000, funcionario1.getSalarioLiquido(), 0);
 		// Valor bem menor
-		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000, "DESENVOLVEDOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 900, funcionario2.getSalarioLiquido());
+		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "DESENVOLVEDOR");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 900, funcionario2.getSalarioLiquido(), 0);
 		// Valor proximo do limite superior
 		Funcionario funcionario3 = new Funcionario("luiggy", "luiggy@email.com", 2999.99, "DESENVOLVEDOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 2699.991, funcionario3.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 2699.991, funcionario3.getSalarioLiquido(), 0);
 		// Valor proximo do limite inferior
 		Funcionario funcionario4 = new Funcionario("luiggy", "luiggy@email.com", 3000.01, "DESENVOLVEDOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 2400.008, funcionario4.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 2400.008, funcionario4.getSalarioLiquido(), 0);
 		// Valor igual ao limite
-		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 2100, "DESENVOLVEDOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 2400, funcionario5.getSalarioLiquido());
+		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 2100.0, "DESENVOLVEDOR");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 2400, funcionario5.getSalarioLiquido(), 0);
 	}
 	
 	@Test
 	void testFuncionarioGetNetSalaryDBA() {
 		// Valor bem maior
-		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000, "DBA");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 7500, funcionario1.getSalarioLiquido());
+		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "DBA");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 7500, funcionario1.getSalarioLiquido(), 0);
 		// Valor bem menor
-		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000, "DBA");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 850, funcionario2.getSalarioLiquido());
+		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "DBA");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 850, funcionario2.getSalarioLiquido(), 0);
 		// Valor proximo do limite superior
 		Funcionario funcionario3 = new Funcionario("luiggy", "luiggy@email.com", 1999.99, "DBA");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1700.0085, funcionario3.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1700.0085, funcionario3.getSalarioLiquido(), 0);
 		// Valor proximo do limite inferior
 		Funcionario funcionario4 = new Funcionario("luiggy", "luiggy@email.com", 2000.01, "DBA");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500.0075, funcionario4.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500.0075, funcionario4.getSalarioLiquido(), 0);
 		// Valor igual ao limite
-		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 2000, "DBA");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500, funcionario5.getSalarioLiquido());		
+		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 2000.0, "DBA");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500, funcionario5.getSalarioLiquido(), 0);		
 	}
 
 	@Test
 	void testFuncionarioGetNetSalaryTESTADOR() {
 		// Valor bem maior
-		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000, "TESTADOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 7500, funcionario1.getSalarioLiquido());
+		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "TESTADOR");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 7500, funcionario1.getSalarioLiquido(), 0);
 		// Valor bem menor
-		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000, "TESTADOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 850, funcionario2.getSalarioLiquido());
+		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "TESTADOR");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 850, funcionario2.getSalarioLiquido(), 0);
 		// Valor proximo do limite superior
 		Funcionario funcionario3 = new Funcionario("luiggy", "luiggy@email.com", 1999.99, "TESTADOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1700.0085, funcionario3.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1700.0085, funcionario3.getSalarioLiquido(), 0);
 		// Valor proximo do limite inferior
 		Funcionario funcionario4 = new Funcionario("luiggy", "luiggy@email.com", 2000.01, "TESTADOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500.0075, funcionario4.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500.0075, funcionario4.getSalarioLiquido(), 0);
 		// Valor igual ao limite
-		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 2000, "TESTADOR");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500, funcionario5.getSalarioLiquido());		
+		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 2000.0, "TESTADOR");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 1500, funcionario5.getSalarioLiquido(), 0);		
 	}
 
 	@Test
 	void testFuncionarioGetNetSalaryGERENTE() {
 		// Valor bem maior
-		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000, "GERENTE");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 7500, funcionario1.getSalarioLiquido());
+		Funcionario funcionario1 = new Funcionario("luiggy", "luiggy@email.com", 10000.0, "GERENTE");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 7500, funcionario1.getSalarioLiquido(), 0);
 		// Valor bem menor
-		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000, "GERENTE");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 800, funcionario2.getSalarioLiquido());
+		Funcionario funcionario2 = new Funcionario("luiggy", "luiggy@email.com", 1000.0, "GERENTE");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 800, funcionario2.getSalarioLiquido(), 0);
 		// Valor proximo do limite superior
 		Funcionario funcionario3 = new Funcionario("luiggy", "luiggy@email.com", 4999.99, "GERENTE");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 3999,992, funcionario3.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 3999.992, funcionario3.getSalarioLiquido(), 0);
 		// Valor proximo do limite inferior
 		Funcionario funcionario4 = new Funcionario("luiggy", "luiggy@email.com", 5000.01, "GERENTE");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 3500,007, funcionario4.getSalarioLiquido());
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 3500.007, funcionario4.getSalarioLiquido(), 0);
 		// Valor igual ao limite
-		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 5000, "GERENTE");
-		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 3500, funcionario5.getSalarioLiquido());		
+		Funcionario funcionario5 = new Funcionario("luiggy", "luiggy@email.com", 5000.0, "GERENTE");
+		assertEquals("ERRO: Salário liquído do desenvolvedor incorreto", 3500, funcionario5.getSalarioLiquido(), 0);		
 	}
 	
 }
