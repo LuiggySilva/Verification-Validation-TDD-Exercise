@@ -23,7 +23,7 @@ public class FuncionarioTest {
 		assertEquals("ERRO: getNome()", nome, funcionario.getNome()); 
 		assertEquals("ERRO: getEmail()", email, funcionario.getEmail()); 
 		assertEquals("ERRO: getSalario()", salario, funcionario.getSalario(), 0); 
-		assertEquals("ERRO: getCargo()", cargo, funcionario.getCargo()); 
+		assertEquals("ERRO: getCargo()", cargo.getCargo(), funcionario.getCargo()); 
 	}	
 	
 	@Test
@@ -38,7 +38,7 @@ public class FuncionarioTest {
 		assertEquals("ERRO: getNome()", nome1, funcionario.getNome()); 
 		assertEquals("ERRO: getEmail()", email1, funcionario.getEmail()); 
 		assertEquals("ERRO: getSalario()", salario1, funcionario.getSalario(), 0); 
-		assertEquals("ERRO: getCargo()", cargo1, funcionario.getCargo()); 
+		assertEquals("ERRO: getCargo()", cargo1.getCargo(), funcionario.getCargo()); 
 		
 		String nome2 = "Irineu";
 		String email2 = "irineu@email.com";
@@ -53,7 +53,7 @@ public class FuncionarioTest {
 		assertEquals("ERRO: setNome()", nome2, funcionario.getNome()); 
 		assertEquals("ERRO: setEmail()", email2, funcionario.getEmail()); 
 		assertEquals("ERRO: setSalario()", salario2, funcionario.getSalario(), 0); 
-		assertEquals("ERRO: setCargo()", cargo2, funcionario.getCargo()); 
+		assertEquals("ERRO: setCargo()", cargo2.getCargo(), funcionario.getCargo()); 
 	}
 
 	@Test
