@@ -48,7 +48,7 @@ public class Funcionario {
 	}
 
 	public String getCargo() {
-		return this.cargo != null ? this.cargo.getCargo() : null ;
+		return this.cargo != null ? this.cargo.getCargo() : null;
 	}
 
 	public void setCargo(CargoENUM cargo) {
@@ -56,75 +56,49 @@ public class Funcionario {
 	}
 
 	public double getSalarioLiquido() {
-		double salarioLiquido = -1;
+		double salarioLiquido = this.salario;
+		double desconto = 0;
 		
 		switch (this.cargo) {
 			case DESENVOLVEDOR: {
-				if (this.salario == 10000) {
-					salarioLiquido = 8000;
-				} else if (this.salario == 1000) {
-					salarioLiquido = 900;
-				} else if (this.salario == 2999.99) {
-					salarioLiquido = 2699.991;
-				} else if (this.salario == 3000.01) {
-					salarioLiquido = 2400.008;
-				} else if (this.salario == 2100) {
-					salarioLiquido = 2400;
+				if (this.salario < DescontoENUM.DESENVOLVEDOR_LIMITE_SALARIO_DESCONTO.getValor()) {
+					desconto = this.salario * DescontoENUM.DESENVOLVEDOR_MENOR_DESCONTO.getValor();
 				} else {
-					salarioLiquido = 0;
+					desconto = this.salario * DescontoENUM.DESENVOLVEDOR_MAIOR_DESCONTO.getValor();					
 				}
+				salarioLiquido -= desconto;
 				break;
 			}
 			case DBA: {
-				if (this.salario == 10000) {
-					salarioLiquido = 7500;
-				} else if (this.salario == 1000) {
-					salarioLiquido = 850;
-				} else if (this.salario == 1999.99) {
-					salarioLiquido = 1700.0085;
-				} else if (this.salario == 2000.01) {
-					salarioLiquido = 1500.0075;
-				} else if (this.salario == 2000) {
-					salarioLiquido = 1500;
+				if (this.salario < DescontoENUM.DBA_LIMITE_SALARIO_DESCONTO.getValor()) {
+					desconto = this.salario * DescontoENUM.DBA_MENOR_DESCONTO.getValor();
 				} else {
-					salarioLiquido = 0;
+					desconto = this.salario * DescontoENUM.DBA_MAIOR_DESCONTO.getValor();					
 				}
+				salarioLiquido -= desconto;
 				break;
 			}
 			case TESTADOR: {
-				if (this.salario == 10000) {
-					salarioLiquido = 7500;
-				} else if (this.salario == 1000) {
-					salarioLiquido = 850;
-				} else if (this.salario == 1999.99) {
-					salarioLiquido = 1700.0085;
-				} else if (this.salario == 2000.01) {
-					salarioLiquido = 1500.0075;
-				} else if (this.salario == 2000) {
-					salarioLiquido = 1500;
+				if (this.salario < DescontoENUM.TESTADOR_LIMITE_SALARIO_DESCONTO.getValor()) {
+					desconto = this.salario * DescontoENUM.TESTADOR_MENOR_DESCONTO.getValor();
 				} else {
-					salarioLiquido = 0;
+					desconto = this.salario * DescontoENUM.TESTADOR_MAIOR_DESCONTO.getValor();					
 				}
+				salarioLiquido -= desconto;
 				break;
 			}
 			case GERENTE: {
-				if (this.salario == 10000) {
-					salarioLiquido = 7500;
-				} else if (this.salario == 1000) {
-					salarioLiquido = 800;
-				} else if (this.salario == 4999.99) {
-					salarioLiquido = 3999.992;
-				} else if (this.salario == 5000.01) {
-					salarioLiquido = 3500.007;
-				} else if (this.salario == 5000) {
-					salarioLiquido = 3500;
+				if (this.salario < DescontoENUM.GERENTE_LIMITE_SALARIO_DESCONTO.getValor()) {
+					desconto = this.salario * DescontoENUM.GERENTE_MENOR_DESCONTO.getValor();
 				} else {
-					salarioLiquido = 0;
+					desconto = this.salario * DescontoENUM.GERENTE_MAIOR_DESCONTO.getValor();					
 				}
+				salarioLiquido -= desconto;
 				break;
 			}
 			default : {
-				salarioLiquido = 0;
+				desconto = 0;
+				salarioLiquido -= desconto;
 			}
 		}
 		
