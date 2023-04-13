@@ -1,14 +1,16 @@
 package testes;
 
-import static org.junit.Assert.assertArrayEquals;
-
 import java.util.Date;
-import java.text.ParseException;
-import java.util.Calendar;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat; 
 
 import org.junit.jupiter.api.Test;
+
+import java.text.ParseException;
+import java.util.Calendar;
+
+import static org.junit.Assert.assertArrayEquals;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat; 
 
 import projeto.Client;
 import projeto.Filter;
