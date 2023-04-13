@@ -10,37 +10,49 @@ public class Filter {
 	private Invoice[] filteredInvoices;
 	
 	public Filter() {
-		super();
 	}
 	
 	public Filter(Invoice[] invoices) {
 		filteredInvoices = new Invoice[invoices.length];
 		
+		scrollAndSetInvoicesList(invoices);
+		
+	}
+	
+	private void scrollAndSetInvoicesList(Invoice[] invoices) {
 		for (int i = 0; i < invoices.length; i++) {			
 			Invoice invoice = invoices[i];
 			
 			if (invoice == null) continue;
 			
-			if (valueLessThan(invoice, 2000)) {
-				filteredInvoices[i] = null;
-				
-			} else if (valueInBetween(invoice, 2000, 2500)
-					&& dateLessThanOrEqual(invoice, 1)) { // 1 mouth
-				filteredInvoices[i] = null;
-				
-			} else if (valueInBetween(invoice, 2500, 3000)
-					&& dateLessThanOrEqual(invoice, 2)) { // 2 mouths
-				filteredInvoices[i] = null;
-				
-			} else if (valueBiggerThan(invoice, 4000)
-					&& isSouthernStates(invoice)) {
-				filteredInvoices[i] = null;
-			} else {
-				filteredInvoices[i] = invoice;
-			}
-	    }
+			verifyInvoiceAndSetInTheList(invoice, i);
+		}
 	}
-	
+
+	private void verifyInvoiceAndSetInTheList(Invoice invoice, Integer i) {
+		if (isNullCondition(invoice))
+			setValueInTheList(i, null);
+		else
+			setValueInTheList(i, invoice);
+	}
+
+	private void setValueInTheList(Integer i, Invoice value) {
+		this.filteredInvoices[i] = value instanceof Invoice ? value : null;
+	}
+
+	private boolean isNullCondition(Invoice invoice) {
+		return (valueLessThan(invoice, 2000)) ||
+				
+			(valueInBetween(invoice, 2000, 2500)
+			&& dateLessThanOrEqual(invoice, 1)) || // 1 mouth
+			
+			(valueInBetween(invoice, 2500, 3000)
+			&& dateLessThanOrEqual(invoice, 2)) || // 2 mouths
+			
+			(valueBiggerThan(invoice, 4000)
+			&& isSouthernStates(invoice));
+	}
+
 	private boolean isSouthernStates(Invoice invoice) {
 		String[] southernStates = {"PR", "SC", "RS"};
 		return Arrays.asList(southernStates).contains(invoice.getClient().getEstate());
