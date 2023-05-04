@@ -41,7 +41,6 @@ public class Filter {
 	}
 
 	private boolean isNullCondition(Invoice invoice) {
-		System.out.println(dateLessThanOrEqual(invoice.getDate(), 1));
 		return (valueLessThan(invoice, 2000)) ||
 				
 			(valueInBetween(invoice, 2000, 2500)
