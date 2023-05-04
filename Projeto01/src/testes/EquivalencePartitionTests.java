@@ -20,7 +20,7 @@ import projeto.Invoice;
 class EquivalencePartitionTests {
 
 	@Test // Inclusion Date > Invoice Date
-	void pe_test1() throws ParseException {
+	void test1() throws ParseException {
 		Exception exception = assertThrows(InvocationTargetException.class, () -> {
 			Client c1 = new Client("Mano Max", "10/10/2023", "GO"); // Client (name, inclusion date, estate)		
 			
@@ -31,7 +31,7 @@ class EquivalencePartitionTests {
 	}
 
 	@Test // value <= 0
-	void pe_test2() throws ParseException {
+	void test2() throws ParseException {
 		Exception exception = assertThrows(InvocationTargetException.class, () -> {
 			Client c1 = new Client("Mano Max", "10/05/2023", "AM"); // Client (name, inclusion date, estate)		
 			
@@ -50,12 +50,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // value < 2000
-	void pe_test3() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getToday(), "SC"); // Client (name, inclusion date, estate)		
+	void test3() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getToday(), "SC"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 1000.00, getToday(), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 1000.00, this.getToday(), c1); // Invoice (code, value, date, client)
 		
 		invoices[0] = i1c1;
 
@@ -68,12 +68,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (2000 <= value <= 2500) AND ((actually date - 1 month) <= invoice date)
-	void pe_test4() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
+	void test4() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 2250.00, getUpdatedMonthsOfTodayToString(-1), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 2250.00, this.getUpdatedMonthsOfTodayToString(-1), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -86,12 +86,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (2000 <= value <= 2500) AND ((actually date - 1 month) > invoice date)
-	void pe_test5() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
+	void test5() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 2250.00, getUpdatedDaysOfTodayToString(-1), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 2250.00, this.getUpdatedDaysOfTodayToString(-1), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -106,12 +106,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value > 2500) AND ((actually date - 1 month) <= invoice date)
-	void pe_test6() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "SC"); // Client (name, inclusion date, estate)		
+	void test6() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-1), "SC"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 3000.00, getUpdatedMonthsOfTodayToString(-1), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 3000.00, this.getToday(), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -126,12 +126,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value > 2500) AND ((actually date - 1 month) > invoice date)
-	void pe_test7() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
+	void test7() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-1), "AM"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 3000.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 3000.00, this.getToday(), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -146,12 +146,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (2500 <= value <= 3000) AND ((actually date - 2 months) <= invoice date)
-	void pe_test8() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
+	void test8() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 2750.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 2750.00, this.getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -164,12 +164,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (2500 <= value <= 3000) AND ((actually date - 2 months) > invoice date)
-	void pe_test9() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "SC"); // Client (name, inclusion date, estate)		
+	void test9() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-1), "SC"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 2750.00, getUpdatedDaysOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 2750.00, this.getUpdatedDaysOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -184,12 +184,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value > 3000) AND ((actually date - 2 months) <= invoice date)
-	void pe_test10() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "GO"); // Client (name, inclusion date, estate)		
+	void test10() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "GO"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 3500.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 3500.00, this.getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -204,12 +204,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value > 3000) AND ((actually date - 2 months) > invoice date)
-	void pe_test11() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
+	void test11() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 3500.00, getUpdatedDaysOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 3500.00, this.getUpdatedDaysOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -224,12 +224,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value > 4000) AND (south region)
-	void pe_test12() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "SC"); // Client (name, inclusion date, estate)		
+	void test12() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "SC"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 4500.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 4500.00, this.getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -242,12 +242,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value > 4000) AND (not south region)
-	void pe_test13() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
+	void test13() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "AM"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 4500.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 4500.00, this.getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -262,12 +262,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value <= 4000) AND (south region)
-	void pe_test14() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "SC"); // Client (name, inclusion date, estate)		
+	void test14() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "SC"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 3500.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 3500.00, this.getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
@@ -282,12 +282,12 @@ class EquivalencePartitionTests {
 	}
 	
 	@Test // (value <= 4000) AND (not south region)
-	void pe_test15() throws ParseException, InvocationTargetException {
-		Client c1 = new Client("Mano Max", getUpdatedMonthsOfTodayToString(-5), "GO"); // Client (name, inclusion date, estate)		
+	void test15() throws ParseException, InvocationTargetException {
+		Client c1 = new Client("Mano Max", this.getUpdatedMonthsOfTodayToString(-5), "GO"); // Client (name, inclusion date, estate)		
 		
 		Invoice[] invoices = new Invoice[1];
 		
-		Invoice i1c1 = new Invoice(1, 3500.00, getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
+		Invoice i1c1 = new Invoice(1, 3500.00, this.getUpdatedMonthsOfTodayToString(-2), c1); // Invoice (code, value, date, client)
 
 		invoices[0] = i1c1;
 		
