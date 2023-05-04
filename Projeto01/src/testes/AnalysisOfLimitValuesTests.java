@@ -728,11 +728,8 @@ class AnalysisOfLimitValuesTests {
 	}
 
 	private String getToday() {
-		Date date = Calendar.getInstance().getTime();
-		
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");  
-		String today = dateFormat.format(date);
-		return today;
+		Date today = Calendar.getInstance().getTime();
+		return this.getFormatedDate(today);
 	}
 
 	private String getUpdatedMonthsOfTodayToString(Integer months) {
@@ -740,9 +737,7 @@ class AnalysisOfLimitValuesTests {
 		cal.add(Calendar.MONTH, months);
 		Date result = cal.getTime();
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");  
-		String date = dateFormat.format(result);
-		return date;
+		return this.getFormatedDate(result);
 	}
 	
 	private String getUpdatedDaysOfTodayToString(Integer days) {
@@ -750,8 +745,10 @@ class AnalysisOfLimitValuesTests {
 		cal.add(Calendar.DAY_OF_WEEK, days);
 		Date result = cal.getTime();
 		
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/YYYY");  
-		String date = dateFormat.format(result);
-		return date;
+		return this.getFormatedDate(result);
+	}
+	
+	private String getFormatedDate(Date date) {
+		return new SimpleDateFormat("dd/MM/YYYY").format(date);
 	}
 }
