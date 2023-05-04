@@ -41,13 +41,14 @@ public class Filter {
 	}
 
 	private boolean isNullCondition(Invoice invoice) {
+		System.out.println(dateLessThanOrEqual(invoice.getDate(), 1));
 		return (valueLessThan(invoice, 2000)) ||
 				
 			(valueInBetween(invoice, 2000, 2500)
-			&& dateLessThanOrEqual(invoice, 1)) || // 1 mouth
+			&& dateLessThanOrEqual(invoice.getDate(), 1)) || // 1 mouth
 			
 			(valueInBetween(invoice, 2500, 3000)
-			&& dateLessThanOrEqual(invoice, 2)) || // 2 mouths
+			&& dateLessThanOrEqual(invoice.getClient().getInclusion(), 2)) || // 2 mouths
 			
 			(valueBiggerThan(invoice, 4000)
 			&& isSouthernStates(invoice));
@@ -58,10 +59,10 @@ public class Filter {
 		return Arrays.asList(southernStates).contains(invoice.getClient().getEstate());
 	}
 
-	private boolean dateLessThanOrEqual(Invoice invoice, Integer mouth) {
+	private boolean dateLessThanOrEqual(Date date, Integer mouth) {
 		LocalDate today = LocalDate.now();
-		return invoice.getDate().before(decrementMonths(today, mouth)) ||
-				invoice.getDate().equals(decrementMonths(today, mouth));
+		return date.before(decrementMonths(today, mouth)) ||
+				date.equals(decrementMonths(today, mouth));
 	}
 
 	private boolean valueBiggerThan(Invoice invoice, int min) {
@@ -69,7 +70,7 @@ public class Filter {
 	}
 
 	private boolean valueInBetween(Invoice invoice, int min, int max) {
-		return min < invoice.getValue() && invoice.getValue() < max;
+		return min <= invoice.getValue() && invoice.getValue() <= max;
 	}
 
 	private boolean valueLessThan(Invoice invoice, int max) {
