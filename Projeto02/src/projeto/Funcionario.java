@@ -52,7 +52,13 @@ public class Funcionario {
 	}
 
 	public void setCargo(CargoENUM cargo) {
-		this.cargo = cargo;
+		switch (cargo) {
+			case DUMMY: {
+				throw new IllegalArgumentException("Cargo do funcionário não existe!");
+			}
+			default:
+				this.cargo = cargo;			
+		}
 	}
 
 	public double getSalarioLiquido() {

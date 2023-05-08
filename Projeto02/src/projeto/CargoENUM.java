@@ -4,7 +4,8 @@ public enum CargoENUM {
     DESENVOLVEDOR("DESENVOLVEDOR"),
     TESTADOR("TESTADOR"),
     GERENTE("GERENTE"),
-    DBA("DBA");
+    DBA("DBA"),
+	DUMMY("DUMMY");
 
     private final String cargo;
 

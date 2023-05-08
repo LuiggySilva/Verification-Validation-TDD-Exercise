@@ -24,4 +24,14 @@
 
 ## Avaliação Projeto02 - Luiggy Silva: **_Calculadora de Salário_**
 
-- ...
+### **Pontos Positivos** sobre o uso de **TDD**:
+- O principal ponto positivo é ter a sensação de que todo o código implementado está correto por conta dos testes que foram criados.
+- Outro aspecto postivo é de que na fase de criação de testes você está "livre" de pensar em como as funcionalidades vão ser implementadas, focando apenas em que tipos e variedades de testes devem ser criados com base na especificação do projeto.
+
+### **Pontos Negativos** sobre o uso de **TDD**:
+- Não ter a certeza de como certas funcionalidades ou atributos seriam implementados fez com que alguns testes fossem mais demorados para serem criados e alterados depois da implementação.
+- Dependendo da complexidade da funcionalidade isso pode tornar o desenvolvimento chato, já que se os testes fossem criados depois da implementação final seria muito dificil que os testes que fossem criados sofressem alguma alteração de imediato.
+
+### **Dificuldades encontradas** com o uso de **TDD**:
+- Uma dificuldade foi a de não pensar na implementação das funcionalidades na fase de criação de testes, o que pode ter tornado essa fase um pouco mais longa do que seria necessário.
+- Outro problema foi a criação de testes que envolviam cálculos com números reais, alguns testes foram alterados após a implementação das funcionalidades para corrigir os problemas de compararação que ocorriam no JUnit. 
